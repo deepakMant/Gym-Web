@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gym Landing Page - Contact Us</title>
+    <link rel="stylesheet" href="contact us.css" />
+  </head>
+  <body>
+    <div class="contact-section">
+      <h2>Contact Us</h2>
+      <p>
+        Feel free to reach out to us for any inquiries or membership details.
+      </p>
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Your name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Your message"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="form-response"></p>
+    </div>
+
+   
+
+    <!-- <script src="times.js"></script> -->
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+      const form = document.querySelector("#contact-form");
+      function sendMsg(e) {
+        e.preventDefault();
+        const name = document.querySelector("#name"),
+          email = document.querySelector("#email"),
+          msg = document.querySelector("#message"),
+          sendEmail = `"    <div style="width: 80%; height: 50%; background-color: aliceblue; text-align: center; padding: 3px; border: black 2px solid; border-radius: 20px;">
+            <h1 style="color: red; font-size: 40px; font-weight: bold; text-transform: uppercase; padding: bottom 3px;">`+name.value+`</h1>
+        <p style="color: black; font-size: 20px; font-style: italic;" >`+msg.value+`</p>
+    </div>";`
+
+        Email.send({
+          SecureToken: "8b65b0b3-0b6b-4f96-a4e1-5b81739060a4",
+          To: "deepakmantro@gmail.com",
+          From: email.value,
+          Subject: "contact form",
+          Body: sendEmail,
+        }).then((message) => {
+          if (message == "OK") {
+            swal("Successfull", "You send text successfully", "success");
+          } else {
+            swal("Something Wrong", "Your data is not recived", "error");
+          }
+        });
+      }
+
+      form.addEventListener("submit", sendMsg);
+    </script>
+  </body>
+</html>
